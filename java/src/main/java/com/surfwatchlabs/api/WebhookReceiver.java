@@ -1,4 +1,4 @@
-package com.surfwatchanalytics.api;
+package com.surfwatchlabs.api;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,17 +20,15 @@ public class WebhookReceiver extends AbstractHandler {
         server.join();
     }
     
-    public void handle(String target,
-            Request baseRequest,
-            HttpServletRequest request,
-            HttpServletResponse response)
+    @Override
+    public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) 
             throws IOException, ServletException {
         
         response.setStatus( HttpServletResponse.SC_OK );
         baseRequest.setHandled( true );
 
         StringBuilder results = new StringBuilder();
-        String line = null;
+        String line;
         try {
             BufferedReader reader = request.getReader();
             while ( ( line = reader.readLine() ) != null ) {
